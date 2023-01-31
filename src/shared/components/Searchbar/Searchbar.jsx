@@ -9,12 +9,18 @@ class Searchbar extends Component {
     search: '',
   };
 
-  // Добавить inChange для инпута
+  static propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+  };
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.onSubmit({ ...this.state });
+    this.props.onSubmit(this.state.search);
     this.reset();
+  };
+
+  handleChangeInput = e => {
+    this.setState({ search: e.target.value });
   };
 
   reset() {
@@ -24,8 +30,10 @@ class Searchbar extends Component {
   }
 
   render() {
+    const { search } = this.state;
+
     return (
-      <header className="searchbar">
+      <header className={styles.Searchbar}>
         <form className="form">
           <Button type="submit" onClickBtn={this.handleSubmit}>
             Search
@@ -37,7 +45,8 @@ class Searchbar extends Component {
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos"
-            value={this.search}
+            value={search}
+            onChange={this.handleChangeInput}
           />
         </form>
       </header>
