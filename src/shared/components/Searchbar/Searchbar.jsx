@@ -34,13 +34,13 @@ class Searchbar extends Component {
 
     return (
       <header className={styles.Searchbar}>
-        <form className="form">
+        <form className={styles.form}>
           <Button type="submit" onClickBtn={this.handleSubmit}>
             Search
           </Button>
 
           <input
-            className="input"
+            className={styles.input}
             type="text"
             autoComplete="off"
             autoFocus

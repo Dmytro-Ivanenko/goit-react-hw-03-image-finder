@@ -4,6 +4,7 @@ import { ColorRing } from 'react-loader-spinner';
 import Searchbar from './shared/components/Searchbar/Searchbar';
 import ImageGallery from './modules/ImageGallery/ImageGallery';
 import Button from './shared/components/Button/Button';
+import Modal from './shared/components/Modal/Modal';
 
 import { searchImages } from './shared/services/pixabay-api';
 
@@ -15,6 +16,7 @@ class App extends Component {
     error: null,
     page: 1,
     showModal: false,
+    modalImage: null,
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -26,7 +28,7 @@ class App extends Component {
 
   async fetchImages() {
     try {
-      this.setState({ loading: true }); // check is work it?
+      this.setState({ loading: true });
       const { search, page } = this.state;
 
       const data = await searchImages(search, page);
@@ -52,13 +54,28 @@ class App extends Component {
     });
   };
 
+  OnClickModal = largeImage => {
+    this.setState({
+      modalImage: largeImage,
+      showModal: true,
+    });
+  };
+
+  OncloseModal = () => {
+    this.setState({
+      showModal: false,
+      modalImage: null,
+    });
+  };
+
   render() {
-    const { images, loading, error, showModal } = this.state;
-    const { loadMore, handleSearchSubmit } = this;
+    const { images, loading, error, showModal, modalImage } = this.state;
+    const { loadMore, handleSearchSubmit, OnClickModal, OncloseModal } = this;
     return (
       <>
         <Searchbar onSubmit={handleSearchSubmit} />
-        <ImageGallery images={images} />
+        <ImageGallery images={images} showModal={OnClickModal} />
+        {error && <p>{error.massage}</p>}
         {loading && (
           <ColorRing
             visible={true}
@@ -74,6 +91,9 @@ class App extends Component {
           <Button type="button" onClickBtn={loadMore}>
             Load more
           </Button>
+        )}
+        {showModal && (
+          <Modal close={OncloseModal} largeImage={modalImage}></Modal>
         )}
       </>
     );
