@@ -6,12 +6,13 @@ import styles from './imageGallery.module.scss';
 const ImageGallery = ({ images, showModal }) => {
   return (
     <ul className={styles.ImageGallery}>
-      {images.map(({ id, webformatURL, largeImageURL }) => {
+      {images.map(({ id, webformatURL, largeImageURL, tags }) => {
         return (
           <ImageGalleryItem
             key={id}
-            onClick={() => showModal(largeImageURL)}
+            onClick={() => showModal(largeImageURL, tags)}
             webformatURL={webformatURL}
+            altText={tags}
           />
         );
       })}

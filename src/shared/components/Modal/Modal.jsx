@@ -7,7 +7,10 @@ const modalRoot = document.querySelector('#modal-root');
 
 class Modal extends Component {
   static propTypes = {
-    largeImage: PropTypes.string.isRequired,
+    imageData: PropTypes.shape({
+      largeImage: PropTypes.string.isRequired,
+      tags: PropTypes.string.isRequired,
+    }),
   };
 
   componentDidMount() {
@@ -25,13 +28,15 @@ class Modal extends Component {
   };
 
   render() {
-    const { largeImage } = this.props;
+    const {
+      imageData: { largeImage, tags },
+    } = this.props;
     const { closeModal } = this;
 
     return createPortal(
       <div className={styles.Overlay} onClick={closeModal}>
         <div className={styles.Modal}>
-          <img src={largeImage} alt="image" />
+          <img src={largeImage} alt={tags} />
         </div>
       </div>,
       modalRoot

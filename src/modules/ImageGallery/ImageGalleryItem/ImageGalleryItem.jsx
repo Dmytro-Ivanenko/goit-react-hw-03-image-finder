@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
 import styles from './imageGalleryItem.module.scss';
 
-const ImageGalleryItem = ({ webformatURL, onClick }) => {
+const ImageGalleryItem = ({ webformatURL, onClick, altText }) => {
   return (
     <li className={styles.ImageGalleryItem} onClick={onClick}>
       <img
         className={styles.ImageGalleryItem_image}
         src={webformatURL}
-        alt="image"
+        alt={altText}
       />
     </li>
   );
@@ -15,6 +15,7 @@ const ImageGalleryItem = ({ webformatURL, onClick }) => {
 
 ImageGalleryItem.propTypes = {
   webformatURL: PropTypes.string.isRequired,
+  altText: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
 };
 
