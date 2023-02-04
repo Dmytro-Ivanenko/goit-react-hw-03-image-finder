@@ -1,4 +1,5 @@
 .Searchbar {
+  width: 100%;
   top: 0;
   left: 0;
   position: sticky;
@@ -21,4 +22,13 @@
   align-items: center;
 
   gap: 40px;
+}
+.input {
+  width: 300px;
+  height: 40px;
+  font-size: 20px;
+}
+
+.button {
+  margin: 0px;
 }

@@ -62,6 +62,7 @@ class App extends Component {
     });
   };
 
+  // modal
   onClickModal = (largeImage, tags) => {
     this.setState({
       modalImage: {
@@ -97,7 +98,7 @@ class App extends Component {
             ariaLabel="blocks-loading"
             wrapperStyle={{}}
             wrapperClass="blocks-wrapper"
-            colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+            colors={['#ffeb0d', '#3f51b5', '#ffeb0d', '#3f51b5', '#ffeb0d']}
           />
         )}
         {Boolean(images.length) && images.length < totalHits && (
