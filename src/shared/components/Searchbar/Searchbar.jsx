@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 import Button from '../Button/Button';
 import styles from './searchbar.module.scss';
@@ -14,9 +15,15 @@ class Searchbar extends Component {
   };
 
   handleSubmit = e => {
+    const { search } = this.state;
     e.preventDefault();
-    this.props.onSubmit(this.state.search);
-    this.reset();
+
+    if (search.trim() !== '') {
+      this.props.onSubmit(search);
+      this.reset();
+    } else {
+      Notify.failure('Please enter a search query.');
+    }
   };
 
   handleChangeInput = e => {
