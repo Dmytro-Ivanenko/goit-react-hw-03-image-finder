@@ -11,6 +11,7 @@ class Modal extends Component {
       largeImage: PropTypes.string.isRequired,
       tags: PropTypes.string.isRequired,
     }),
+    close: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
